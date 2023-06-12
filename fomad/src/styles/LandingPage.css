@@ -1,0 +1,17 @@
+.section-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #FDD835;
+    /* Adjust other styles such as font, font-size, etc., based on your theme */
+  }
+  
+  .about-us,
+  .products,
+  .community {
+    /* Add specific styles for each section if needed */
+  }
+  
