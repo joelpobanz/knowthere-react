@@ -12,9 +12,15 @@ import map3 from '../images/map3.jpg';
 const LandingPage = () => {
   return (
     <div>
-      <Parallax bgImage={map1} strength={500}>
+      <Parallax bgImage={map1} strength={1000}>
         <div className="section-container">
           <AboutUs />
+        </div>
+        <div className="section-container">
+          <Products />
+        </div>
+        <div className="section-container">
+          <Community />
         </div>
       </Parallax>
 
