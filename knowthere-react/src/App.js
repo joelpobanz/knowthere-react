@@ -1,21 +1,23 @@
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import Signup from './components/Signup';
 import React, { useState } from 'react';
 import Login from './components/Login';
-import LandingPage from './components/LandingPage'; // Import the LandingPage component
+import LandingPage from './components/LandingPage';
 import NavBar from './components/Navbar';
-import Products from './components/Products'; // Import the Products component
+import Products from './components/Products';
+import AuthContext from './utils/AuthContext';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const handleLoginSuccess = () => {
+  const handleLoginSuccess = (history) => {
     setIsLoggedIn(true);
+    history.push("/");
   };
 
   return (
     <div>
-      {!isLoggedIn ? (
+      <AuthContext.Provider value={{ isAuthenticated: isLoggedIn }}>
         <Router>
           <>
             <NavBar />
@@ -35,9 +37,7 @@ function App() {
             </Switch>
           </>
         </Router>
-      ) : (
-        <div>Welcome to the content delivery platform!</div>
-      )}
+      </AuthContext.Provider>
     </div>
   );
 }

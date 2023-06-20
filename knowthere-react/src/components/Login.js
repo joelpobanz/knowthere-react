@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { Box, Button, Container, TextField, Typography } from '@mui/material';
-
-const Login = ({ onLoginSuccess }) => {
+const Login = (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -19,7 +18,7 @@ const Login = ({ onLoginSuccess }) => {
       if (response.status === 200) {
         const data = response.data;
         localStorage.setItem('authToken', data.token); // Save the token to local storage
-        onLoginSuccess(); // Call the onLoginSuccess function
+        props.onLoginSuccess(props.history); // Call the onLoginSuccess function
       } else {
         alert('Invalid email or password');
       }
@@ -74,4 +73,4 @@ const Login = ({ onLoginSuccess }) => {
   );
 };
 
-export default Login;
+export default withRouter(Login);

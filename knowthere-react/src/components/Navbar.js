@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/Navbar.css';
 import { ProfileCard } from './ProfileCard';
+import { LoginCard } from './LoginCard';
+import AuthContext from '../utils/AuthContext'
 
 const NavBar = () => {
+  // Use useContext hook to access the isAuthenticated value from AuthContext
+  const { isAuthenticated } = useContext(AuthContext);
+
   return (
     <nav>
       <ul className="navbar">
@@ -20,7 +25,7 @@ const NavBar = () => {
           <Link to="/community">Community</Link>
         </li>
         <li>
-          <ProfileCard /> 
+          { isAuthenticated ? <ProfileCard /> : <LoginCard /> }
         </li>
       </ul>
     </nav>
