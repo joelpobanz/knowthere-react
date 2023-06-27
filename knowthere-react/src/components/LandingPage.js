@@ -24,13 +24,13 @@ const LandingPage = () => {
         </div>
       </Parallax>
 
-      <Parallax bgImage={map2} strength={500}>
+      <Parallax bgImage={map2} strength={1000}>
         <div className="section-container">
           <Products />
         </div>
       </Parallax>
 
-      <Parallax bgImage={map3} strength={500}>
+      <Parallax bgImage={map3} strength={1000}>
         <div className="section-container">
           <Community />
         </div>

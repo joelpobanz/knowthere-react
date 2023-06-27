@@ -15,9 +15,16 @@ function App() {
     history.push("/");
   };
 
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    // Also remove token or any user data stored when user logged in
+    localStorage.removeItem('authToken');
+    //history.push("/");
+  };
+
   return (
     <div>
-      <AuthContext.Provider value={{ isAuthenticated: isLoggedIn }}>
+      <AuthContext.Provider value={{ isAuthenticated: isLoggedIn,  logout: handleLogout }}>
         <Router>
           <>
             <NavBar />
