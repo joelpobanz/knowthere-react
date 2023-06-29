@@ -19,7 +19,6 @@ function App() {
     setIsLoggedIn(false);
     // Also remove token or any user data stored when user logged in
     localStorage.removeItem('authToken');
-    //history.push("/");
   };
 
   return (

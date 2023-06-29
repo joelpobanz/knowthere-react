@@ -3,14 +3,15 @@ import axios from 'axios';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import ProductCard from './ProductCard';
-import img from '../images/colorfulMap.jpg'
-import img2 from '../images/colorfulMap2.jpg'  // Your second image
+import PlanCard from './PlanCard';
+import '../styles/Products.css';
+import img from '../images/colorfulMap.jpg';
+import img2 from '../images/colorfulMap2.jpg';  
 
-const Products = ({ products }) => {
+const Products = () => {
   const [open, setOpen] = useState(false);
   const [currentProduct, setCurrentProduct] = useState(null);
-  const [subscriptionPlans, setSubscriptionPlans] = useState([]);
+  const [subscriptionPlans, setSubscriptionPlans] = useState([]); // Corrected variable name
 
   useEffect(() => {
     const fetchSubscriptionPlans = async () => {
@@ -32,40 +33,54 @@ const Products = ({ products }) => {
     fetchSubscriptionPlans();
   }, []);
 
-  const handleOpen = (product) => {
-    setCurrentProduct(product);
+  useEffect(() => {
+    document.body.style.backgroundColor = "#FDD835";
+
+    // When component unmounts, set the background color back to default
+    return () => {
+        document.body.style.backgroundColor = null;
+    }
+  }, []);
+
+  const handleOpen = (plan) => {
+    console.log('Opening product', plan);
+    setCurrentProduct(plan);
     setOpen(true);
   };
 
-  const handleClose = () => setOpen(false);
-
-  // Hardcoded product for testing
-  const testProduct = {
-    id: '1',
-    name: 'Test Product',
-    image: img  // Placeholder image url
-  };
-  
-  const testProduct2 = {
-    id: '2',
-    name: 'Test Product 2',
-    image: img2  // Placeholder image url
+  const handleClose = () => {
+    console.log('Closing product');
+    setOpen(false);
   };
 
   return (
-    <div>
-      <ProductCard product={testProduct} handleOpen={handleOpen} />
-      <ProductCard product={testProduct2} handleOpen={handleOpen} />
+    <div className='plans-container'>
       {subscriptionPlans.map(plan => (
-        <ProductCard product={plan} handleOpen={handleOpen} key={plan.id} />
+         <PlanCard 
+          className='product-card'
+          plan={plan} 
+          handleOpen={handleOpen} 
+          image={plan.id === 1 ? img : img2}
+          description={`This is a ${plan.title} plan that will deliver a new state package each month for ${plan.price}`}
+          key={plan.id} 
+        />
       ))}
       <Modal open={open} onClose={handleClose}>
-        <Box sx={{ width: 400, padding: 4, bgcolor: 'background.paper', m: 'auto', mt: 10 }}>
+        <Box sx={{ 
+          width: 400, 
+          padding: 4, 
+          bgcolor: 'background.paper', 
+          m: 'auto', 
+          mt: 10,
+          border: '1px solid #000',  // Add some border to make it visible
+          boxShadow: 24,  // Add some box shadow to make it pop a little
+          p: 4 
+        }}>
           <Typography variant="h6" component="h2">
-            {currentProduct && currentProduct.name}
+            {currentProduct && currentProduct.title}
           </Typography>
           <Typography sx={{ mt: 1.5 }} color="text.secondary">
-            {currentProduct && currentProduct.description}
+            {currentProduct && `This is a ${currentProduct.title} plan that will deliver a new state package for ${currentProduct.price}`}
           </Typography>
         </Box>
       </Modal>

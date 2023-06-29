@@ -1,0 +1,13 @@
+/* Products.css */
+.plans-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: #FDD835;
+}
+
+.plans-container .product-card {
+    width: 345px;
+    margin: 20px;
+}
