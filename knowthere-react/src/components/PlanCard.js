@@ -5,41 +5,34 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import '../styles/ContentCard.css';
 
 const PlanCard = ({ plan, image, handleOpen }) => {
   console.log(plan);
   return (
-    <Card sx={{ 
-            maxWidth: 345,
-            borderRadius: '50px',
-            background: '#FDD835',
-            boxShadow: '20px 20px 60px #d7b82d, -20px -20px 60px #fff83d',
-            margin: '20px',  // Added margin for better view 
-        }}
-    >
-      <CardMedia
-        component="img"
-        height="140"
-        image={image} // this should be the URL of the image
-        alt={plan.title}
-      />
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          {plan.title}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          Price: {plan.price}
-        </Typography>
-      </CardContent>
-      <CardActions>
-        <Button size="small" color="secondary" onClick={() => handleOpen(plan)}>
-          View More
-        </Button>
-        <Button size="small" color="secondary">
-          Buy Now
-        </Button>
-      </CardActions>
-    </Card>
+    <div className='card'>
+      <div class='content'>
+        <CardMedia
+          component="img"
+          height="140"
+          width='110%' // makes the image take the full width of the parent
+          objectFit='cover'
+          image={image} // this should be the URL of the image
+          alt={plan.title}
+        />
+          <p class='heading'>{plan.title}
+          <p class='para'>
+            Price: {plan.price}
+          </p>
+          </p>
+          <button class='btn' onClick={() => handleOpen(plan)}>
+            View More
+          </button>
+          <button class='btn'>
+            Buy Now
+          </button>
+      </div>
+    </div>
   );
 };
 

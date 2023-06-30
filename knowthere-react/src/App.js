@@ -6,6 +6,11 @@ import LandingPage from './components/LandingPage';
 import NavBar from './components/Navbar';
 import Products from './components/Products';
 import AuthContext from './utils/AuthContext';
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+
+// Initialize Stripe:
+const stripePromise = loadStripe('your_stripe_public_key');
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -24,25 +29,27 @@ function App() {
   return (
     <div>
       <AuthContext.Provider value={{ isAuthenticated: isLoggedIn,  logout: handleLogout }}>
-        <Router>
-          <>
-            <NavBar />
-            <Switch>
-              <Route path="/signup">
-                <Signup />
-              </Route>
-              <Route path="/login">
-                <Login onLoginSuccess={handleLoginSuccess} />
-              </Route>
-              <Route path="/products">
-                <Products />
-              </Route>
-              <Route path="/">
-                <LandingPage />
-              </Route>
-            </Switch>
-          </>
-        </Router>
+        <Elements stripe={stripePromise}>
+          <Router>
+            <>
+              <NavBar />
+              <Switch>
+                <Route path="/signup">
+                  <Signup />
+                </Route>
+                <Route path="/login">
+                  <Login onLoginSuccess={handleLoginSuccess} />
+                </Route>
+                <Route path="/products">
+                  <Products />
+                </Route>
+                <Route path="/">
+                  <LandingPage />
+                </Route>
+              </Switch>
+            </>
+          </Router>
+        </Elements>
       </AuthContext.Provider>
     </div>
   );

@@ -5,6 +5,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import PlanCard from './PlanCard';
 import '../styles/Products.css';
+import '../styles/ContentCard.css';
 import img from '../images/colorfulMap.jpg';
 import img2 from '../images/colorfulMap2.jpg';  
 
@@ -57,7 +58,6 @@ const Products = () => {
     <div className='plans-container'>
       {subscriptionPlans.map(plan => (
          <PlanCard 
-          className='product-card'
           plan={plan} 
           handleOpen={handleOpen} 
           image={plan.id === 1 ? img : img2}
@@ -66,21 +66,21 @@ const Products = () => {
         />
       ))}
       <Modal open={open} onClose={handleClose}>
-        <Box sx={{ 
-          width: 400, 
-          padding: 4, 
-          bgcolor: 'background.paper', 
-          m: 'auto', 
-          mt: 10,
-          border: '1px solid #000',  // Add some border to make it visible
-          boxShadow: 24,  // Add some box shadow to make it pop a little
-          p: 4 
+        <Box sx={{
+            width: 400, 
+            padding: 4, 
+            bgcolor: 'background.paper', 
+            m: 'auto', 
+            mt: 10,
+            border: '1px solid #000',
+            boxShadow: 24,
+            p: 4 
         }}>
           <Typography variant="h6" component="h2">
             {currentProduct && currentProduct.title}
           </Typography>
           <Typography sx={{ mt: 1.5 }} color="text.secondary">
-            {currentProduct && `This is a ${currentProduct.title} plan that will deliver a new state package for ${currentProduct.price}`}
+            {currentProduct && `This is a ${currentProduct.title} plan that will deliver a new state package each month for until the subscription is cancelled. Only ${currentProduct.price}`}
           </Typography>
         </Box>
       </Modal>

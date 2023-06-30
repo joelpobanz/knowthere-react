@@ -4,9 +4,7 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-}
-
-.plans-container .product-card {
-    width: 345px;
-    margin: 20px;
+    position: relative;
+    z-index: 0;
+    background: transparent;
 }
