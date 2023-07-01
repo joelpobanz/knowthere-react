@@ -17,7 +17,7 @@ const Products = () => {
   useEffect(() => {
     const fetchSubscriptionPlans = async () => {
       try {
-        const authToken = localStorage.getItem('authToken');
+        const authToken = localStorage.getItem('token');
         const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/subscription_plans`, {
           headers: {
             'Authorization': `Bearer ${authToken}`
